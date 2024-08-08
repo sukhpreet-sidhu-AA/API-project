@@ -1,7 +1,8 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const { Op } = require('sequelize');
 
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, requireAuth, authorization } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -9,14 +10,22 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 const validateSignup = [
+  check('firstName')
+    .exists({ checkFalsy:true })
+    .isLength({ min: 1, max: 20})
+    .withMessage('First Name is required'),
+  check('lastName')
+    .exists({ checkFalsy:true })
+    .isLength({ min: 1, max: 20})
+    .withMessage('Last Name is required'),
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
-    .withMessage('Please provide a valid email.'),
+    .withMessage('Invalid email'),
   check('username')
     .exists({ checkFalsy: true })
     .isLength({ min: 4 })
-    .withMessage('Please provide a username with at least 4 characters.'),
+    .withMessage('Username is required'),
   check('username')
     .not()
     .isEmail()
@@ -31,8 +40,30 @@ const validateSignup = [
 router.post(
   '/',
   validateSignup,
-  async (req, res) => {
+  async (req, res, next) => {
     const { email, password, username, firstName, lastName } = req.body;
+
+    const existingUser = await User.findOne({
+      where:{
+        [Op.or]:{
+          username,
+          email
+        }
+      }
+    })
+
+    if(existingUser) {
+      const err = new Error('User already Exists');
+      err.message = 'User already exists'
+      err.status = 500;
+
+      if(existingUser.username === username) {
+        err.errors = {username:'User with that username already exists'};}
+      else 
+        err.errors = {email:'User with that email already exists'};
+
+      return next(err)
+    }
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({ email, username, hashedPassword, firstName, lastName });
 

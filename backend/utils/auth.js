@@ -71,4 +71,12 @@ const requireAuth = function (req, _res, next) {
     return next(err);
   }
 
-  module.exports = { setTokenCookie, restoreUser, requireAuth };
+const authorization = function (req, userId) {
+  if(req.user.id !== userId){
+    const err = new Error('Forbidden')
+    err.message = 'Forbidden'
+    err.status = 403
+    return next(err)
+  }
+}
+  module.exports = { setTokenCookie, restoreUser, requireAuth, authorization };
