@@ -74,9 +74,10 @@ const requireAuth = function (req, _res, next) {
 const authorization = function (req, userId) {
   if(req.user.id !== userId){
     const err = new Error('Forbidden')
-    err.message = 'Forbidden'
+    // err.message = 'Forbidden'
     err.status = 403
-    return next(err)
+    return err
   }
+  return true
 }
   module.exports = { setTokenCookie, restoreUser, requireAuth, authorization };
