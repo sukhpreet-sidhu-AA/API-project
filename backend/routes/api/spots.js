@@ -133,6 +133,7 @@ router.post('/',
         const ownerId = user.id
         const { address, city, state, country, lat, lng, name, description, price} = req.body;
         const newSpot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price})
+        res.status(201)
         return res.json(newSpot)
 })
 
