@@ -14,12 +14,18 @@ router.get('/', async(req, res) => {
         //calculating avg rating
         const sum = await Review.sum('stars', {where: { spotId:spot.id } })
         const count = await Review.count({ where: { spotId:spot.id } })
-        spot.avgRating = sum/count
+        if(count)
+            spot.avgRating = sum/count
+        else
+            spot.avgRating = 'No reviews yet'
 
         //adding preview image if applicable
-        const spotImage = await SpotImage.findOne({ where: { spotId:spot.id } })
-        if(spotImage.preview === true){
-            spot.previewImage = spotImage.url
+        const spotImage = await SpotImage.findOne({ raw:true, where: { spotId:spot.id } })
+        if(spotImage){
+            if(spotImage.preview === 1){
+                spot.previewImage = spotImage.url
+            }
+            else spot.previewImage = 'No preview available'
         }
         else
             spot.previewImage = 'No preview available'
@@ -28,7 +34,9 @@ router.get('/', async(req, res) => {
 })
 
  
-router.get('/current', requireAuth, async(req, res) => {
+router.get('/current', 
+    requireAuth, 
+    async(req, res) => {
     const { user } = req;
 
     const userSpots = await Spot.findAll({ raw:true, where:{ ownerId:user.id} })
@@ -162,4 +170,44 @@ router.post('/:spotId/images',
 
 })
 
+router.put('/:spotId', 
+    requireAuth,
+    validateSpot,
+    async (req, res, next) => {
+        const spot = await Spot.findByPk(req.params.spotId)
+        if(spot){
+            const authorized = authorization(req, spot.ownerId);
+            if(authorized !== true)
+                return next(authorized)
+
+            const { address, city, state, country, lat, lng, name, description, price} = req.body;
+            spot.set({address, city, state, country, lat, lng, name, description, price});
+            spot.save();
+            return res.json(spot)
+
+        }
+        else{
+            res.status(404);
+            return res.json({message:"Spot couldn't be found"})
+        }
+})
+
+router.delete('/:spotId',
+    requireAuth,
+    async (req, res, next) => {
+        const spot = await Spot.findByPk(req.params.spotId);
+        if(spot){
+            const authorized = authorization(req, spot.ownerId);
+            if(authorized !== true)
+                return next(authorized)
+
+            spot.destroy();
+            return res.json({message:'Successfully deleted'})
+        }
+        else{
+            res.status(404);
+            return res.json({message:"Spot couldn't be found"})
+        }
+    }
+)
 module.exports = router
