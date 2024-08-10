@@ -24,20 +24,20 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false
     },
     startDate: {
-      type:DataTypes.DATE,
+      type:DataTypes.DATEONLY,
       allowNull:false,
-      validate:{
-        isAfter: new Date().toISOString().split('T')[0],
-        msg:'start date must be a future date'
-      }
+      // validate:{
+      //   isAfter: new Date().toISOString().split('T')[0],
+      //   msg:'start date must be a future date'
+      // }
     },
     endDate: {
-      type:DataTypes.DATE,
+      type:DataTypes.DATEONLY,
       allowNull:false,
-      validate:{
-        isAfter: this.startDate,
-        msg:'end date must be after the start date'
-      }
+      // validate:{
+      //   isAfter: this.startDate,
+      //   msg:'end date must be after the start date'
+      // }
     }
   }, {
     sequelize,
