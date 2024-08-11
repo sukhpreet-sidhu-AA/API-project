@@ -361,8 +361,8 @@ router.get('/:spotId/bookings',
         if(spot){
             if(spot.ownerId === req.user.id){
                 const bookings = await Booking.findAll({
-                    raw:true,
-                    nest:true,
+                    // raw:true,
+                    // nest:true,
                     where:{ spotId:req.params.spotId },
                     include:{
                         model:User,
@@ -371,23 +371,25 @@ router.get('/:spotId/bookings',
                 })
 
                 for(let booking of bookings){
-                    booking.startDate = booking.startDate.split(' ')[0]
-                    booking.endDate = booking.endDate.split(' ')[0]
+                    booking = booking.get({raw:true})
+                    booking.startDate = booking.startDate.toISOString().split('T')[0]
+                    booking.endDate = booking.endDate.toISOString().split('T')[0]
                 }
 
                 return res.json({Bookings:bookings})
             }
 
             const bookings = await Booking.findAll({
-                raw:true,
-                nest:true,
+                // raw:true,
+                // nest:true,
                 where:{ spotId:req.params.spotId },
                 attributes: ['spotId', 'startDate', 'endDate']
             })
 
             for(let booking of bookings){
-                booking.startDate = booking.startDate.split(' ')[0]
-                booking.endDate = booking.endDate.split(' ')[0]
+                booking = booking.get({raw:true})
+                booking.startDate = booking.startDate.toISOString().split('T')[0]
+                booking.endDate = booking.endDate.toISOString().split('T')[0]
             }
 
             return res.json({Bookings:bookings})
