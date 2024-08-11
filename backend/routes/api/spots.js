@@ -188,7 +188,7 @@ const validateSpot = [
         .withMessage("State is required"),
     check("country")
         .exists({ checkFalsy:true })
-        .isLength({ min:1, max:30 })
+        .isLength({ min:1, max:100 })
         .withMessage("Country is required"),
     check("lat")
         .exists({ checkFalsy:true })
@@ -208,7 +208,7 @@ const validateSpot = [
         .withMessage("Description is required"),
     check("price")
         .exists({ checkFalsy:true })
-        .isInt({ min:0 })
+        .isFloat({ min:0 })
         .withMessage("Price per day must be a positive number"),
     handleValidationErrors
 ]

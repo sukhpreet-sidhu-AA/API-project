@@ -42,14 +42,14 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     country: {
-      type:DataTypes.STRING(30),
+      type:DataTypes.STRING(100),
       allowNull:false,
       validate:{
         len:[1,30]
       }
     },
     lat: {
-      type:DataTypes.DECIMAL,
+      type:DataTypes.FLOAT,
       allowNull:false,
       validate:{
         min:-90,
@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     lng: {
-      type:DataTypes.DECIMAL,
+      type:DataTypes.FLOAT,
       allowNull:false,
       validate:{
         min:-180,
@@ -79,7 +79,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     price: {
-      type:DataTypes.DECIMAL,
+      type:DataTypes.FLOAT,
       allowNull:false,
       validate:{
         min:0

@@ -88,6 +88,10 @@ router.put('/:reviewId',
     async (req, res, next) => {
         const userReview = await Review.findByPk(req.params.reviewId)
         if(userReview){
+            const authorized = authorization(req, userReview.userId)
+            if(authorized !== true)
+                return next(authorized)
+
             const { review, stars } = req.body
             userReview.set({ review, stars })
             userReview.save()

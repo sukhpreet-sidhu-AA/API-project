@@ -11,15 +11,16 @@ router.get('/current',
     async (req, res) => {
         const { user } = req
         const bookings = await Booking.findAll({
-            raw:true,
-            nest:true,
+            // raw:true,
+            // nest:true,
             where:{ userId:user.id },
             include:{ model:Spot, attributes:{ exclude: ['createdAt', 'updatedAt']}}
         })
-
+        
         for(let booking of bookings){
-            booking.startDate = booking.startDate.split(' ')[0]
-            booking.endDate = booking.endDate.split(' ')[0]
+            booking = booking.get({raw:true})
+            booking.startDate = booking.startDate.toISOString().split('T')[0]
+            booking.endDate = booking.endDate.toISOString().split('T')[0]
         }
 
         for(let booking of bookings){
