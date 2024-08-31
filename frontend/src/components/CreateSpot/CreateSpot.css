@@ -1,0 +1,13 @@
+.createSpotForm{
+    display: flex;
+    flex-direction: column;
+}
+
+.createSpotLabel{
+    display: flex;
+    flex-direction: column;
+}
+
+.errors {
+    color: red;
+}

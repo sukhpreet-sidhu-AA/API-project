@@ -1,0 +1,30 @@
+.reviewModal {
+    display: flex;
+    flex-direction: column;
+}
+
+#starRating {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+input[type='radio'] {
+    display: none;
+}
+
+
+.starLabel {
+    margin: 0;
+}
+
+#starText {
+    display: flex;
+    font-size: 1.2rem;
+    align-items: center;
+    padding-left: .5rem;
+}
+
+.errors{
+    color: red;
+}

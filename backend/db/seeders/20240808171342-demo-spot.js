@@ -45,6 +45,18 @@ module.exports = {
         name: 'Tech House',
         description: 'A house in San Jose, maybe close to some tech companies',
         price: 300.00
+      },
+      {
+        ownerId:2,
+        address: '1234 test address',
+        city: 'San Jose',
+        state: 'California',
+        country: 'United States',
+        lat: 37.335278,
+        lng: -121.891944,
+        name: 'User 2 house',
+        description: 'some bs',
+        price: 200.00
       }
     ])
   },
@@ -53,7 +65,7 @@ module.exports = {
     options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      name: { [Op.in]: ['Test House', 'SF House', 'Tech House'] }
+      name: { [Op.in]: ['Test House', 'SF House', 'Tech House', 'User 2 house'] }
     }, {})
   }
 };
