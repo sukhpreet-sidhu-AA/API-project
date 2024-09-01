@@ -43,24 +43,31 @@ router.post(
   async (req, res, next) => {
     const { email, password, username, firstName, lastName } = req.body;
 
-    const existingUser = await User.findOne({
+    const existingUser = await User.findAll({
+      raw:true,
       where:{
         [Op.or]:{
           username,
           email
         }
-      }
+      },
+      attributes: [ 'id', 'username', 'firstName', 'lastName', 'email' ]
     })
+    
+    console.log(existingUser);
 
-    if(existingUser) {
+    if(existingUser.length !== 0) {
       const err = new Error('User already Exists');
       err.message = 'User already exists'
       err.status = 500;
+      err.errors = {}
 
-      if(existingUser.username === username) {
-        err.errors = {username:'User with that username already exists'};}
-      else 
-        err.errors = {email:'User with that email already exists'};
+      existingUser.forEach(ele => {
+        if(ele.username === username)
+          err.errors.username = 'User with that username already exists';
+        if(ele.email === email)
+          err.errors.email = 'User with that email already exists';
+      })
 
       return next(err)
     }

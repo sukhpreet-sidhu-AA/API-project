@@ -16,7 +16,7 @@ const SpotDetails = () => {
     const reviewInfo = useSelector(state => state.reviews)
     const { name, city, state, country, Owner, SpotImages, price, description } = spotDetails
     let reviewed = false;
-
+    console.log(reviewInfo);
     useEffect(() => {
         dispatch(getSpotDetails(spotId))
         dispatch(getReviews(spotId))
@@ -30,8 +30,6 @@ const SpotDetails = () => {
         Object.values(reviewInfo).forEach(ele => {
             if(sessionUser.id === ele.userId)
                 reviewed = true
-            else
-                reviewed = false
         })
 
     return (
@@ -65,7 +63,7 @@ const SpotDetails = () => {
                     buttonText='Post your Review'
                     modalComponent={<CreateReview />}
                 />)}
-                <ReviewList />
+                {Object.values(reviewInfo).length > 0 ? <ReviewList /> : (<p>Be the first to post a review!</p>)}
             </div>
         </div>
     )

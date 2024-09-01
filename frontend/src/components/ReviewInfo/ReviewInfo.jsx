@@ -20,7 +20,7 @@ const ReviewInfo = ({ spotDetails }) => {
         return (
             <div className="review-Info">
                 <IoIosStar />
-                <div>{avgStarRating % 1 !== 0 ? avgStarRating : `${avgStarRating}.0`}</div>
+                <div>{avgStarRating % 1 !== 0 ? Number.parseFloat(avgStarRating).toFixed(2) : `${avgStarRating}.0`}</div>
                 <div> · </div>
                 <div>{reviewCount === 1 ? `${reviewCount} review` : `${reviewCount} reviews`}</div>
             </div>

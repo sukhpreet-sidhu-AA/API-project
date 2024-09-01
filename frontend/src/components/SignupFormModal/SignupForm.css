@@ -1,0 +1,21 @@
+#signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form-labels {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0px;
+    padding-top: 25px;
+}
+
+.form-errors{
+    color: red;
+    margin: 0px 5px;
+    position:absolute;
+}
+
+#sign-up-button{
+    margin-top: 36px;
+}

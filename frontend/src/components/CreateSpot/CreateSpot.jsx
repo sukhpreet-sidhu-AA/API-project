@@ -1,14 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import './CreateSpot.css'
-import { createSpot } from "../../store/spot"
-import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { createSpot} from "../../store/spot"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate, useParams } from "react-router-dom"
+import { updateSpot } from "../../store/spot"
 
 const CreateSpot = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
+    const {spotId} = useParams()
+    const spotsData = useSelector(state => state.spots)
+    const spots = Object.values(spotsData)
     
-
     const [country, setCountry] = useState('')
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
@@ -22,6 +25,33 @@ const CreateSpot = () => {
     const [image3, setImage3] = useState('')
     const [image4, setImage4] = useState('')
     const [errors, setErrors] = useState({})
+
+    const title = spotId ? (<h1>Update Your Spot</h1>) : (<h1>Create a New Spot</h1>)
+    const spotToUpdate = spots.find(({ id }) => id === parseInt(spotId))
+        
+
+    useEffect(() => {
+        if(spotId){
+            setCountry(spotToUpdate.country)
+            setAddress(spotToUpdate.address)
+            setCity(spotToUpdate.city)
+            setState(spotToUpdate.state)
+            setDescription(spotToUpdate.description)
+            setName(spotToUpdate.name)
+            setPrice(spotToUpdate.price)
+        } else {
+            setCountry('')
+            setAddress('')
+            setCity('')
+            setState('')
+            setDescription('')
+            setName('')
+            setPrice('')
+        }
+        
+    }, [spotId, spotToUpdate])
+
+    
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -40,16 +70,19 @@ const CreateSpot = () => {
             errors.name = true
         if (isNaN(price))
             errors.price = true
-        if (previewImage.length === 0)
-            errors.previewImage = true
-        if (image1.length > 0 && endsWith(image1))
-            errors.image1 = true            
-        if (image2.length > 0 && endsWith(image2))
-            errors.image2 = true        
-        if (image3.length > 0 && endsWith(image3))
-            errors.image3 = true        
-        if (image4.length > 0 && endsWith(image4))
-            errors.image4 = true
+        if(!spotId){
+            if (previewImage.length === 0)
+                errors.previewImage = true
+            if (image1.length > 0 && endsWith(image1))
+                errors.image1 = true            
+            if (image2.length > 0 && endsWith(image2))
+                errors.image2 = true        
+            if (image3.length > 0 && endsWith(image3))
+                errors.image3 = true        
+            if (image4.length > 0 && endsWith(image4))
+                errors.image4 = true
+        }
+        
 
         setErrors(errors)
         
@@ -66,11 +99,18 @@ const CreateSpot = () => {
                 price,
                 images
             }
-            
-            const result = dispatch(createSpot(newSpot))
+            let result
+
+            if(spotId) {result = dispatch(updateSpot(newSpot, spotId))}
+
+            else {result = dispatch(createSpot(newSpot))}
+
             result.then(res => {
+                console.log(res);
                 navigate(`/spots/${res}`)
             })
+                
+            
         }
     }
 
@@ -85,7 +125,7 @@ const CreateSpot = () => {
 
     return (
         <>
-            <h1>Create a New Spot</h1>
+            {title}
             <h2>Where&apos;s your place located?</h2>
             <p>Guests will only get your exact address once they booked a reservation.</p>
             <form className="createSpotForm">
@@ -180,7 +220,8 @@ const CreateSpot = () => {
                         {errors.price && (<div className="errors">Price is required</div>)}
                     </label>
                 </div>
-                <div>
+                {!spotId && (
+                    <div>
                     <label className="createSpotLabel">
                         <h2>Liven up your spot with photos</h2>
                         <p>Submit a link to at least one photo to publish your spot</p>
@@ -232,10 +273,12 @@ const CreateSpot = () => {
 
                     </label>
                 </div>
+                )}
+                
                 <button
                     type="submit"
                     onClick={submitHandler}>
-                    Create Spot
+                    {spotId ? 'Update your Spot' : 'Create Spot'}
                 </button>
             </form>
 

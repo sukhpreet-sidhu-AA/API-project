@@ -45,6 +45,16 @@ export const createReview = (spotId, review, stars) => async (dispatch) => {
 
 }
 
+export const deleteReview = (id, spotId) => async(dispatch) => {
+    await csrfFetch(`/api/reviews/${id}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    dispatch(getReviews(spotId))
+}
+
 const reviewReducer = (state = {}, action) => {
     switch(action.type){
         case GET_REVIEWS:{
