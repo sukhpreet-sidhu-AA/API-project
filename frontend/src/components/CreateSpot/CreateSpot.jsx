@@ -64,7 +64,7 @@ const CreateSpot = () => {
             errors.city = true
         if (state.length === 0)
             errors.state = true
-        if (description.length < 30)
+        if (description.length < 30 || description.length > 120)
             errors.description = true
         if (name.length === 0)
             errors.name = true
@@ -187,7 +187,7 @@ const CreateSpot = () => {
                             placeholder="Please write at least 30 characters"
                             onChange={(e) => setDescription(e.target.value)}
                         />
-                        {errors.description && (<div className="errors">Description needs a minimum of 30 characters</div>)}
+                        {errors.description && (<div className="errors">Description needs a minimum of 30 characters and max 120 characters</div>)}
                     </label>
                 </div>
                 <div>

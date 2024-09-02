@@ -1,0 +1,16 @@
+#delete-page{
+    display: flex;
+    flex-direction: column;
+}
+
+#delete{
+    background-color: red;
+}
+
+#keep{
+    background-color: gray;
+}
+
+.buttonText{
+    color: white;
+}

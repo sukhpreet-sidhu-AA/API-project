@@ -7,6 +7,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import './Navigation.css'
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ function ProfileButton({ user }) {
     links = (
       <>
         <li>
-          <OpenModalButton
+          <OpenModalButton 
             buttonText="Log In"
             modalComponent={<LoginFormModal />}
           />
@@ -70,7 +71,7 @@ function ProfileButton({ user }) {
           <NavLink onClick={() => setShowMenu(!showMenu)} to='/spots/current'>Manage Spots</NavLink>
         </li>
         <li>
-          <button onClick={logout}>Log Out</button>
+          <button className='button' onClick={logout}>Log Out</button>
         </li>
       </>
     )
@@ -78,7 +79,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={toggleMenu}>
+      <button id='profileButton' onClick={toggleMenu}>
         <FaUserCircle />
       </button>
       <ul className={ulClassName} ref={ulRef}>

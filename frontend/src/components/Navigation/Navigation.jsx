@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import { FaFortAwesome } from 'react-icons/fa';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -22,16 +23,18 @@ function Navigation({ isLoaded }) {
     }
 
     return (
-        <ul>
+        <ul className='navList'>
             <li>
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/"><FaFortAwesome /> CastleBnB</NavLink>
             </li>
+            <div id='nav-list-right'>
             {isLoaded && sessionUser && (
                 <li>
-                    <NavLink to='/spots/new'>Create a spot</NavLink>
+                    <NavLink to='/spots/new'>Create a New Spot</NavLink>
                 </li>
             )}
             {isLoaded && sessionLinks}
+            </div>
         </ul>
     );
 }

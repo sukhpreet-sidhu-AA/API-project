@@ -7,6 +7,7 @@ import ReviewInfo from "../ReviewInfo/ReviewInfo";
 import ReviewList from "../ReviewList";
 import CreateReview from "../CreateReview/CreateReview";
 import OpenModalButton from "../OpenModalButton";
+import './SpotDetails.css'
 
 const SpotDetails = () => {
     const dispatch = useDispatch()
@@ -16,6 +17,8 @@ const SpotDetails = () => {
     const reviewInfo = useSelector(state => state.reviews)
     const { name, city, state, country, Owner, SpotImages, price, description } = spotDetails
     let reviewed = false;
+    let count = 0;
+
     console.log(reviewInfo);
     useEffect(() => {
         dispatch(getSpotDetails(spotId))
@@ -32,38 +35,43 @@ const SpotDetails = () => {
                 reviewed = true
         })
 
+    const photos = SpotImages.map(ele => {count++; return (
+        <img key={ele.id} id={ele.preview ? count-- && 'main' : `img${count}`} src={ele.url} alt="" />
+    )})
     return (
-        <div>
+        <div id="spot-details">
+            <div>
             <h1>{name}</h1>
             <h2>{city}, {state}, {country}</h2>
-            <div>
-                {SpotImages.map(ele => (
-                <img key={ele.id} src={ele.url} alt="" />
-            ))}
+            <div id="grid">
+                {photos}
             </div>
-            <div>
-                <div>
+            <div id="info-bar">
+                <div id="info">
                     <h3>Hosted by {Owner.firstName} {Owner.lastName}</h3>
                     <p>{description}</p>
                 </div>
-                <div>
-                    <div>
+                <div id="price-bar">
+                    <div id="price-reviews">
                         <div>${price} night</div>
-                        <div>
+                        <div >
                             <ReviewInfo spotDetails={spotDetails}/>
                         </div>
                     </div>
-                    <button onClick={() => window.alert('Feature Coming Soon')}>Reserve</button>
+                    <button id="reserve" onClick={() => window.alert('Feature Coming Soon')}>Reserve</button>
                 </div>
             </div>
-            <div>
+            <div className="test">
                 <ReviewInfo spotDetails={spotDetails}/>
+                <div className="small">
                 {sessionUser && sessionUser.id !== spotDetails.Owner.id && !reviewed &&
                 (<OpenModalButton 
                     buttonText='Post your Review'
                     modalComponent={<CreateReview />}
                 />)}
                 {Object.values(reviewInfo).length > 0 ? <ReviewList /> : (<p>Be the first to post a review!</p>)}
+                </div>
+            </div>
             </div>
         </div>
     )

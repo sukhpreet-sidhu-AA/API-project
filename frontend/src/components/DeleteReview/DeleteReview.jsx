@@ -12,12 +12,12 @@ const DeleteReview = ({id, spotId}) => {
         closeModal()
     }
     return (
-        <>
+        <div>
             <h2>Confirm Delete</h2>
             <p>Are you sure you want to delete this review?</p>
             <button onClick={() => handleDelete()}>Yes (Delete Review)</button>
             <button onClick={() => closeModal()}>No (Keep Review)</button>
-        </>
+        </div>
 
     )
 }

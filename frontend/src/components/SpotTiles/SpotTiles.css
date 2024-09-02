@@ -1,0 +1,48 @@
+.tile{
+    width: 500px;
+    height: 350px;
+    padding: 20px;
+}
+
+
+.img-wrapper{
+    width: 500px;
+    height: 350px;
+}
+
+.img{
+    object-fit: cover;
+    width: 100%;
+}
+
+#tiles{
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 40px 0px ;
+    
+}
+
+.star{
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+    align-items: center;
+    font-size: 16px;
+}
+
+.price{
+    font-size: 16px;
+}
+
+#wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+#update-delete{
+    display: flex
+}
+
+#update{
+    width: 230px;
+}

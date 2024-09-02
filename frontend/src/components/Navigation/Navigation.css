@@ -5,4 +5,31 @@
 .profile-dropdown {
     position: absolute;
     background-color: white;
+    padding: 5px
+}
+
+.navList{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: solid 1px gray;
+
+}
+
+#nav-list-right{
+    display: flex;
+    align-items: center;
+}
+
+li{
+    list-style-type: none;
+    
+}
+
+#profileButton{
+    width: 200px;
+}
+
+.button {
+    width: 200px
 }

@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 import OpenModalButton from "../OpenModalButton"
 import DeleteReview from "../DeleteReview/DeleteReview"
+import './ReviewList.css'
 
 const ReviewList = () => {
     const reviewData = useSelector(state => state.reviews)
@@ -25,10 +26,10 @@ const ReviewList = () => {
     return (
         <div>
             {reviewsSorted.map(ele => (
-                <div key={ele.id}>
-                    <div>{ele.User.firstName}</div>
+                <div className="reviews" key={ele.id}>
+                    <div id="name">{ele.User.firstName}</div>
                     {/* <div>{new Date(ele.createdAt).toUTCString().slice(8,16)}</div> */}
-                    <div>{month[parseInt(ele.createdAt.split('-')[1])-1]} {ele.createdAt.slice(0,4)}</div>
+                    <div className="date">{month[parseInt(ele.createdAt.split('-')[1])-1]} {ele.createdAt.slice(0,4)}</div>
                     <p>{ele.review}</p>
                     {id === ele.User.id && (<OpenModalButton 
                         buttonText='Delete'
