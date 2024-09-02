@@ -13,33 +13,58 @@ module.exports = {
     await SpotImage.bulkCreate([
       {
         spotId:1,
-        url:'https://as1.ftcdn.net/v2/jpg/01/18/46/52/1000_F_118465200_0q7Of6UnbA8kDlYEe3a4PuIyue27fbuV.jpg',
+        url:'https://i.pinimg.com/originals/3f/6b/62/3f6b627f6153df183f4602a50c1146e4.jpg',
         preview:true,
       },
       {
         spotId:1,
-        url:'https://as1.ftcdn.net/v2/jpg/01/18/46/52/1000_F_118465200_0q7Of6UnbA8kDlYEe3a4PuIyue27fbuV.jpg',
+        url:'https://i.pinimg.com/originals/b7/a1/52/b7a1521812b3f04aa35745cad9a41727.png',
         preview:false,
       },
       {
         spotId:1,
-        url:'https://as1.ftcdn.net/v2/jpg/01/18/46/52/1000_F_118465200_0q7Of6UnbA8kDlYEe3a4PuIyue27fbuV.jpg',
+        url:'https://i.pinimg.com/originals/e6/3d/b7/e63db77d07846cfa3b428dad5124420e.jpg',
+        preview:false,
+      },
+      {
+        spotId:1,
+        url:'https://i.pinimg.com/originals/1f/2a/33/1f2a33c3b06d7fdd1672ac98e6b13588.jpg',
         preview:false,
       },
       {
         spotId:2,
-        url:'https://as1.ftcdn.net/v2/jpg/01/57/36/74/1000_F_157367489_FSqP231EvpCB9fqD5s5PhCp8MOuEcfih.jpg',
+        url:'https://static.wikia.nocookie.net/lotr/images/e/e4/Minas_Tirith.jpg',
+        preview:true,
+      },
+      {
+        spotId:2,
+        url:'https://i.pinimg.com/originals/6f/ec/d2/6fecd288b1aaf86a3c1598cb1178ff70.jpg',
+        preview:false,
+      },
+      {
+        spotId:3,
+        url:'https://i.pinimg.com/originals/9b/1f/33/9b1f33e11976066af409585cbbd0d5a3.jpg',
         preview:true,
       },
       {
         spotId:3,
-        url:'https://as2.ftcdn.net/v2/jpg/02/86/74/59/1000_F_286745923_V0bdu4fC53WuBvC5FyP8jxgIizs77DLT.jpg',
+        url:'https://i.pinimg.com/originals/2a/d9/d7/2ad9d76807cb2a1451d3cd8f4ffa5f82.jpg',
+        preview:false,
+      },
+      {
+        spotId:3,
+        url:'https://i.pinimg.com/originals/60/20/f6/6020f6facf49aa64059102e8a11018dc.jpg',
+        preview:false,
+      },
+      {
+        spotId:4,
+        url:'https://i.pinimg.com/originals/55/11/e2/5511e200f3f13c647ea32e7182d25a25.jpg',
         preview:true,
       },
       {
         spotId:4,
-        url:'https://cdn.onekindesign.com/wp-content/uploads/2019/10/Traditional-English-Manor-House-Jauregui-Architect-01-1-Kindesign.jpg',
-        preview:true,
+        url:'https://i.pinimg.com/originals/1e/1e/64/1e1e647605d02b9294dff9a1f7c8bcc5.jpg',
+        preview:false,
       }
     ])
   },

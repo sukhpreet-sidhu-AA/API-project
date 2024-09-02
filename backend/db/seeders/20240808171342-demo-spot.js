@@ -12,50 +12,50 @@ module.exports = {
     await Spot.bulkCreate([
       {
         ownerId:1,
-        address:'123 Tester Lane',
-        city:'Los Testeles',
-        state:'California',
-        country: 'United States',
+        address:'Hogwarts Castle',
+        city:'Highlands',
+        state:'Scotland',
+        country: 'Great Britain',
         lat: 34.052235,
         lng:-118.243683,
-        name:'Test House',
-        description:'Test house for test purposes',
+        name:'Hogwarts Castle',
+        description:'A huge, seven-story building with many towers, turrets, staircases, and full of magic',
         price: 100.00
       },
       {
         ownerId:2,
-        address:'234 Tester Lane',
-        city:'San Francisco',
-        state:'California',
-        country:'United States',
+        address:'Eastern Edge',
+        city:'Mount Mindolluin',
+        state:'White Mountains',
+        country:'Middle Earth',
         lat:37.773972,
         lng:-122.431297,
-        name: 'SF House',
-        description:'A house in SF nothing more',
+        name: 'Minas Tirith',
+        description:'Minas Tirith is a city and fortress in the land of Middle-earth that serves as the capital of Gondor',
         price: 200.00
       },
       {
         ownerId:3,
-        address: '345 Tester Lane',
-        city: 'San Jose',
-        state: 'California',
-        country: 'United States',
+        address: 'Bruinen River gorge',
+        city: 'Western slope of Misty Mountains',
+        state: 'Eastern Eriador',
+        country: 'Middle Earth',
         lat: 37.335278,
         lng: -121.891944,
-        name: 'Tech House',
-        description: 'A house in San Jose, maybe close to some tech companies',
+        name: 'Rivendell',
+        description: 'A sanctuary, a magical Elvish otherworld, and a fortress.',
         price: 300.00
       },
       {
-        ownerId:2,
+        ownerId:4,
         address: '1234 test address',
-        city: 'San Jose',
-        state: 'California',
-        country: 'United States',
+        city: 'Anywhere',
+        state: 'Everywhere',
+        country: 'Ingary',
         lat: 37.335278,
         lng: -121.891944,
-        name: 'User 2 house',
-        description: 'some bs',
+        name: 'Howls Moving Castle',
+        description: 'Tall, off-balanced, black-brick castle with four square towers, and three doors',
         price: 200.00
       }
     ])
@@ -65,7 +65,7 @@ module.exports = {
     options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      name: { [Op.in]: ['Test House', 'SF House', 'Tech House', 'User 2 house'] }
+      ownerId: { [Op.in]: [1,2,3,4] }
     }, {})
   }
 };

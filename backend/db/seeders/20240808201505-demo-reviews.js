@@ -12,37 +12,37 @@ module.exports = {
       {
         spotId:1,
         userId:2,
-        review:'It was great',
-        stars:1,
+        review:'Love the british!',
+        stars:4,
       },
       {
         spotId:1,
         userId:3,
-        review:'It was average',
+        review:'It was so cold.',
         stars:1,
       },
       {
         spotId:2,
         userId:1,
-        review:'It was great',
+        review:'Its so white.',
         stars:3,
       },
       {
         spotId:2,
         userId:3,
-        review:'It was average',
+        review:'I have a fear of heights.',
         stars:1,
       },
       {
         spotId:3,
         userId:1,
-        review:'It was great',
+        review:'So peaceful here.',
         stars:4,
       },
       {
         spotId:3,
         userId:2,
-        review:'It was average',
+        review:'Not big on nature personally.',
         stars:1,
       }
     ])
