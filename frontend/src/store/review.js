@@ -23,7 +23,6 @@ export const getReviews = (spotId) => async (dispatch) => {
         const data = await res.json()
         dispatch(loadReviews(data.Reviews))
     } catch(error) {
-        console.log(await error.json());
         dispatch(emptyReviews())
     }
 }

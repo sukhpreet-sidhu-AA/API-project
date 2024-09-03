@@ -33,7 +33,7 @@ module.exports = {
       },
       {
         spotId:2,
-        url:'https://static.wikia.nocookie.net/lotr/images/e/e4/Minas_Tirith.jpg',
+        url:'https://miro.medium.com/v2/resize:fit:720/format:webp/0*p1YXEErUFOQa7juR.jpg',
         preview:true,
       },
       {

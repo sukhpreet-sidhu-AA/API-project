@@ -54,7 +54,7 @@ router.post(
       attributes: [ 'id', 'username', 'firstName', 'lastName', 'email' ]
     })
     
-    console.log(existingUser);
+    // console.log(existingUser);
 
     if(existingUser.length !== 0) {
       const err = new Error('User already Exists');

@@ -24,7 +24,6 @@ export const getAllSpots = () => async (dispatch) => {
 }
 
 export const createSpot = ({ address, city, state, country, name, description, price, images }) => async () => {
-    try {
         const spotRes = await csrfFetch('/api/spots', {
             method: 'POST',
             headers: {
@@ -46,9 +45,7 @@ export const createSpot = ({ address, city, state, country, name, description, p
         const data = await spotRes.json();
         createSpotImage(images, data.id)
         return data.id
-    } catch (error) {
-        console.log(await error.json());
-    }
+    
 }
 
 const createSpotImage = async (images, id) => {

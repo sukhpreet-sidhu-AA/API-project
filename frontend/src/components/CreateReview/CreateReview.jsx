@@ -1,6 +1,7 @@
 
 import { useModal } from "../../context/Modal"
-import { IoIosStar } from "react-icons/io";
+// import { IoIosStar } from "react-icons/io";
+import { PiStarFourFill } from "react-icons/pi";
 import './CreateReview.css'
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,9 +45,10 @@ const CreateReview = () => {
     return (
         <>
             <form className="reviewModal">
-                <h2>How was your stay?</h2>
+                <h2 id="review-title">How was your stay?</h2>
                 {errors.message && (<div className="errors">{errors.message}</div>)}
                 <textarea 
+                id="review-text"
                 value={review}
                 onChange={(e) => setReview(e.target.value)}
                 placeholder="Leave your review here..." 
@@ -62,9 +64,9 @@ const CreateReview = () => {
                                     value={ratingValue}
                                     onChange={() => setRating(ratingValue)}
                                 />
-                                <IoIosStar
+                                <PiStarFourFill
                                     className="stars"
-                                    color={ratingValue <= (hover || rating) ? '#ffc107' : '#e4e5e9'}
+                                    color={ratingValue <= (hover || rating) ? '#7c142c' : '#E2DCDB'}
                                     onMouseEnter={() => setHover(ratingValue)}
                                     onMouseLeave={() => setHover(null)}
                                 />

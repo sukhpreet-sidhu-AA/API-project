@@ -39,15 +39,16 @@ const CreateSpot = () => {
             setDescription(spotToUpdate.description)
             setName(spotToUpdate.name)
             setPrice(spotToUpdate.price)
-        } else {
-            setCountry('')
-            setAddress('')
-            setCity('')
-            setState('')
-            setDescription('')
-            setName('')
-            setPrice('')
-        }
+        } 
+        // else {
+        //     setCountry('')
+        //     setAddress('')
+        //     setCity('')
+        //     setState('')
+        //     setDescription('')
+        //     setName('')
+        //     setPrice('')
+        // }
         
     }, [spotId, spotToUpdate])
 
@@ -57,30 +58,30 @@ const CreateSpot = () => {
         e.preventDefault();
         const errors = {}
         if (country.length === 0)
-            errors.country = true
+            errors.country = 'Country is required'
         if (address.length === 0)
-            errors.address = true
+            errors.address = 'Address is required'
         if (city.length === 0)
-            errors.city = true
+            errors.city = 'City is required'
         if (state.length === 0)
-            errors.state = true
+            errors.state = 'State is required'
         if (description.length < 30 || description.length > 120)
-            errors.description = true
+            errors.description = 'Description needs a minimum of 30 characters and max 120 characters'
         if (name.length === 0)
-            errors.name = true
-        if (isNaN(price))
-            errors.price = true
+            errors.name = 'Name is required'
+        if (isNaN(price) || price <= 0)
+            errors.price = 'Price is required'
         if(!spotId){
-            if (previewImage.length === 0)
-                errors.previewImage = true
-            if (image1.length > 0 && endsWith(image1))
-                errors.image1 = true            
-            if (image2.length > 0 && endsWith(image2))
-                errors.image2 = true        
-            if (image3.length > 0 && endsWith(image3))
-                errors.image3 = true        
-            if (image4.length > 0 && endsWith(image4))
-                errors.image4 = true
+            if (previewImage.length === 0 || endsWith(previewImage))
+                errors.previewImage = 'Preview image is required'
+            if (endsWith(image1))
+                errors.image1 = 'Image URL must end in .png, .jpg. jpeg'            
+            if (endsWith(image2))
+                errors.image2 = 'Image URL must end in .png, .jpg. jpeg'        
+            if (endsWith(image3))
+                errors.image3 = 'Image URL must end in .png, .jpg. jpeg'        
+            if (endsWith(image4))
+                errors.image4 = 'Image URL must end in .png, .jpg. jpeg'
         }
         
 
@@ -106,17 +107,17 @@ const CreateSpot = () => {
             else {result = dispatch(createSpot(newSpot))}
 
             result.then(res => {
-                console.log(res);
+                
                 navigate(`/spots/${res}`)
             })
                 
-            
+
         }
     }
 
     const endsWith = (url) => {
         let value = true;
-        if(url.endsWith('.png') || url.endsWith('.jpg') || url.endsWith('.jpeg'))
+        if(url.endsWith('.png') || url.endsWith('.jpg') || url.endsWith('.jpeg') || !url)
             value = false
 
         return value
@@ -124,11 +125,11 @@ const CreateSpot = () => {
 
 
     return (
-        <>
+        <div id="form-wrapper">
+            <form className="createSpotForm">
             {title}
             <h2>Where&apos;s your place located?</h2>
             <p>Guests will only get your exact address once they booked a reservation.</p>
-            <form className="createSpotForm">
                 <div>
                     <label className="createSpotLabel">
                         Country
@@ -139,7 +140,7 @@ const CreateSpot = () => {
                             placeholder="Country"
                             onChange={(e) => setCountry(e.target.value)}
                         />
-                        {errors.country && (<div className="errors">Country is required</div>)}
+                        {errors.country && (<div className="errors">{errors.country}</div>)}
                     </label>
                     <label className="createSpotLabel">
                         Address
@@ -150,9 +151,10 @@ const CreateSpot = () => {
                             placeholder="Address"
                             onChange={(e) => setAddress(e.target.value)}
                         />
-                        {errors.address && (<div className="errors">Address is required</div>)}
+                        {errors.address && (<div className="errors">{errors.address}</div>)}
                     </label>
-                    <label className="createSpotLabel">
+                    <div id="city-state">
+                    <label className="createSpotLabel" id="city">
                         City
                         <input
                             type="text"
@@ -161,9 +163,9 @@ const CreateSpot = () => {
                             placeholder="City"
                             onChange={(e) => setCity(e.target.value)}
                         />
-                        {errors.city && (<div className="errors">City is required</div>)}
+                        {errors.city && (<div className="errors">{errors.city}</div>)}
                     </label>
-                    <label className="createSpotLabel">
+                    <label className="createSpotLabel" id="state">
                         State
                         <input
                             type="text"
@@ -172,8 +174,9 @@ const CreateSpot = () => {
                             placeholder="State"
                             onChange={(e) => setState(e.target.value)}
                         />
-                        {errors.state && (<div className="errors">State is required</div>)}
+                        {errors.state && (<div className="errors">{errors.state}</div>)}
                     </label>
+                    </div>
                 </div>
                 <div>
                     <h2>Describe your place to your guests</h2>
@@ -187,7 +190,7 @@ const CreateSpot = () => {
                             placeholder="Please write at least 30 characters"
                             onChange={(e) => setDescription(e.target.value)}
                         />
-                        {errors.description && (<div className="errors">Description needs a minimum of 30 characters and max 120 characters</div>)}
+                        {errors.description && (<div className="errors">{errors.description}</div>)}
                     </label>
                 </div>
                 <div>
@@ -202,7 +205,7 @@ const CreateSpot = () => {
                             placeholder="Name of your spot"
                             onChange={(e) => setName(e.target.value)}
                         />
-                        {errors.name && (<div className="errors">Name is required</div>)}
+                        {errors.name && (<div className="errors">{errors.name}</div>)}
                     </label>
                 </div>
                 <div>
@@ -217,7 +220,7 @@ const CreateSpot = () => {
                             placeholder="Price per night (USD)"
                             onChange={(e) => setPrice(e.target.value)}
                         />
-                        {errors.price && (<div className="errors">Price is required</div>)}
+                        {errors.price && (<div className="errors">{errors.price}</div>)}
                     </label>
                 </div>
                 {!spotId && (
@@ -232,7 +235,7 @@ const CreateSpot = () => {
                             placeholder="Preview Image URL"
                             onChange={(e) => setPreviewImage(e.target.value)}
                         />
-                        {errors.previewImage && (<div className="errors">Preview image is required</div>)}
+                        {errors.previewImage && (<div className="errors">{errors.previewImage}</div>)}
                         
                         <input 
                             type="text"
@@ -241,7 +244,7 @@ const CreateSpot = () => {
                             placeholder="Image URL"
                             onChange={(e) => setImage1(e.target.value)}  
                         />
-                        {errors.image1 && (<div className="errors">Image URL must end in .png, .jpg. jpeg</div>)}
+                        {errors.image1 && (<div className="errors">{errors.image1}</div>)}
                         <input 
                             type="text"
                             name="image2"
@@ -249,7 +252,7 @@ const CreateSpot = () => {
                             placeholder="Image URL"
                             onChange={(e) => setImage2(e.target.value)}  
                         />
-                        {errors.image2 && (<div className="errors">Image URL must end in .png, .jpg. jpeg</div>)}
+                        {errors.image2 && (<div className="errors">{errors.image2}</div>)}
                         <input 
                             type="text"
                             name="image3"
@@ -257,7 +260,7 @@ const CreateSpot = () => {
                             placeholder="Image URL"
                             onChange={(e) => setImage3(e.target.value)}  
                         />
-                        {errors.image3 && (<div className="errors">Image URL must end in .png, .jpg. jpeg</div>)}
+                        {errors.image3 && (<div className="errors">{errors.image3}</div>)}
                         <input 
                             type="text"
                             name="image4"
@@ -265,7 +268,7 @@ const CreateSpot = () => {
                             placeholder="Image URL"
                             onChange={(e) => setImage4(e.target.value)}  
                         />
-                        {errors.image4 && (<div className="errors">Image URL must end in .png, .jpg. jpeg</div>)}
+                        {errors.image4 && (<div className="errors">{errors.image4}</div>)}
 
 
 
@@ -276,13 +279,14 @@ const CreateSpot = () => {
                 )}
                 
                 <button
+                    id="submit-button"
                     type="submit"
                     onClick={submitHandler}>
                     {spotId ? 'Update your Spot' : 'Create Spot'}
                 </button>
             </form>
 
-        </>
+        </div>
     )
 }
 

@@ -13,8 +13,8 @@ const DeleteSpot = ({id}) => {
     }
     return (
         <div id="delete-page">
-            <h2>Confirm Delete</h2>
-            <p>Are you sure you want to remove this spot?</p>
+            <h2 className="delete-text">Confirm Delete</h2>
+            <p className="delete-text">Are you sure you want to remove this spot?</p>
             <button className="buttonText" id="delete" onClick={() => handleDelete()}>Yes (Delete Spot)</button>
             <button className="buttonText" id="keep" onClick={() => closeModal()}>No (Keep Spot)</button>
         </div>

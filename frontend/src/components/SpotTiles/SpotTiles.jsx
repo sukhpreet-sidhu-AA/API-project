@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom"
-import { IoIosStar } from "react-icons/io"
+// import { IoIosStar } from "react-icons/io"
+import { PiStarFourFill } from "react-icons/pi";
 import OpenModalButton from "../OpenModalButton";
 import DeleteSpot from "../DeleteSpot/DeleteSpot";
 import './SpotTiles.css'
@@ -19,19 +20,19 @@ const SpotTiles = ({ spotList, managed }) => {
     }
 
     return (
-        <div id="wrapper">
+        <div>
             <div id="tiles">
                 {spotList.sort(sortSpots).map(({ id, avgRating, city, state, previewImage, price, name }) => (
                     <div key={id} className="tile">
-                        <NavLink to={`/spots/${id}`} className='test' title={name}>
+                        <NavLink to={`/spots/${id}`} className='tooltip grow' data-title={name}>
                             <div className="img-wrapper">
                                 <img src={previewImage} alt="" className="img" />
                             </div>
-                            <div>
+                            <div className="spot-text">
                                 <div className="star">
                                     <span>{city}, {state} </span>
-                                    <span >
-                                        <IoIosStar />
+                                    <span id="rating">
+                                        <PiStarFourFill color="#7c142c"/>
                                         <span> {avgRating === 'No reviews yet' || avgRating === null ? 'New' : (avgRating % 1 !== 0 ? Number.parseFloat(avgRating).toFixed(1) : `${avgRating}.0`)}</span>
                                     </span>
 

@@ -1,4 +1,5 @@
 .review-Info{
     display: flex;
-    gap: 0px .2rem
+    gap: 0px .2rem;
+    align-items: center;
 }

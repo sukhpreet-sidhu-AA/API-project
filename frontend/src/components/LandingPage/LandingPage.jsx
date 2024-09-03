@@ -15,7 +15,10 @@ const LandingPage = () => {
     }, [dispatch])
 
     return (
-        <SpotTiles spotList={spotList}/>
+        <div id="wrapper">
+            <SpotTiles spotList={spotList}/>
+        </div>
+        
     )
 
 }

@@ -27,7 +27,7 @@ function LoginFormModal() {
   const demoLogin = (e) => {
     e.preventDefault()
     return dispatch(sessionActions.login({
-      credential: 'Demo-lition',
+      credential: 'HPotter',
       password: 'password'
     }))
     .then(closeModal)
@@ -46,9 +46,10 @@ function LoginFormModal() {
 
   return (
     <>
-      <h1>Log In</h1>
+      
       <form onSubmit={handleSubmit}>
         <div className='form-box'>
+        <h1 id='h1'>Log In</h1>
         <label>
           Username or Email
           <input

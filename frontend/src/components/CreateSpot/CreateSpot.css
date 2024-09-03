@@ -1,6 +1,8 @@
 .createSpotForm{
     display: flex;
     flex-direction: column;
+    max-width: 600px;
+    padding: 30px
 }
 
 .createSpotLabel{
@@ -10,4 +12,24 @@
 
 .errors {
     color: red;
+}
+
+#form-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+#city-state{
+    display: flex;
+
+}
+
+#city{
+    width: 70%;
+}
+
+#submit-button{
+    margin: auto;
+    border: 1px solid rgba(192, 114, 114, 0.671);
+    box-shadow: 2px 2px 10px rgba(120, 120, 120, 0.432);
 }

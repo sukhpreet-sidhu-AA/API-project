@@ -19,7 +19,6 @@ const SpotDetails = () => {
     let reviewed = false;
     let count = 0;
 
-    console.log(reviewInfo);
     useEffect(() => {
         dispatch(getSpotDetails(spotId))
         dispatch(getReviews(spotId))

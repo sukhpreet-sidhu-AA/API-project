@@ -4,13 +4,21 @@
 }
 
 #delete{
-    background-color: red;
+    background-color: rgb(242, 45, 45);
+    box-shadow: 2px 2px 10px rgba(120, 120, 120, 0.432);
 }
 
 #keep{
-    background-color: gray;
+    background-color: #898281;
 }
 
 .buttonText{
     color: white;
+    font-size: 16px;
+    padding: 5px 0px;
+}
+
+.delete-text{
+    display: flex;
+    justify-content: center;
 }

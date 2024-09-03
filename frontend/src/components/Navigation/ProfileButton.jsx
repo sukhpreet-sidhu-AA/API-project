@@ -50,12 +50,14 @@ function ProfileButton({ user }) {
       <>
         <li>
           <OpenModalButton 
+            onButtonClick={() => setShowMenu(!showMenu)}
             buttonText="Log In"
             modalComponent={<LoginFormModal />}
           />
         </li>
         <li>
           <OpenModalButton
+            onButtonClick={() => setShowMenu(!showMenu)}
             buttonText="Sign Up"
             modalComponent={<SignupFormModal />}
           />
@@ -65,11 +67,17 @@ function ProfileButton({ user }) {
   } else {
     links = (
       <> 
-        <li>Hello, {user.firstName}</li>
-        <li>{user.email}</li>
-        <li>
-          <NavLink onClick={() => setShowMenu(!showMenu)} to='/spots/current'>Manage Spots</NavLink>
-        </li>
+        <div className='profile-info'>
+          <li>Hello, {user.firstName}</li>
+        </div>
+        <div className='profile-info'>
+          <li>{user.email}</li>
+        </div>
+        <div id='manage-spots'>
+          <li id='manage-spots-link'>
+            <NavLink onClick={() => setShowMenu(!showMenu)} to='/spots/current'>Manage Spots</NavLink>
+          </li>
+        </div>
         <li>
           <button className='button' onClick={logout}>Log Out</button>
         </li>
@@ -80,7 +88,9 @@ function ProfileButton({ user }) {
   return (
     <>
       <button id='profileButton' onClick={toggleMenu}>
-        <FaUserCircle />
+        <div id='user-wrapper'>
+          <FaUserCircle color='#7c142c' size='20px'/> 
+        </div>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {links}

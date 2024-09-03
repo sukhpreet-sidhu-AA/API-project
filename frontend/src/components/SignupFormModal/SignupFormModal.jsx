@@ -32,7 +32,6 @@ function SignupFormModal() {
         .then(closeModal)
         .catch(async (res) => {
           const data = await res.json();
-          console.log(data);
           if (data?.errors) {
             setErrors(data.errors);
           }
@@ -53,10 +52,9 @@ function SignupFormModal() {
       firstName === '' ||
       lastName === '' ||
       password === '' ||
-      confirmPassword  === '') {errors.field = true}
-
-    if(username.length < 4 && username !== '') errors.username = 'Username must be atleast 4 characters'
-    if(password.length < 6 && password !== '') errors.password = 'Password must be atleast 6 characters'
+      confirmPassword  === ''||
+      username.length < 4 ||
+      password.length < 6 ) {errors.field = true}
 
     setErrors(errors)
   },[setErrors, email, username, firstName, lastName, password, confirmPassword])
@@ -65,7 +63,7 @@ function SignupFormModal() {
     <>
       
       <form onSubmit={handleSubmit} id='signup-form'>
-        <h1>Sign Up</h1>
+        <h1 id='title'>Sign Up</h1>
         <label className='signup-form-labels'>
           Email
           <input
@@ -126,7 +124,7 @@ function SignupFormModal() {
           />
         </label>
         <div>{errors.confirmPassword && (<p className='form-errors'>{errors.confirmPassword}</p>)}</div>
-        <button id='sign-up-button' disabled={errors.field || errors.username || errors.password} type="submit">Sign Up</button>
+        <button id='sign-up-button' disabled={errors.field} type="submit">Sign Up</button>
       </form>
     </>
   );

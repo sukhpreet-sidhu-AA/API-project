@@ -1,1 +1,16 @@
-/* TODO: Add sitewide styles */
+body{
+    background-color:  #E2DCDB;
+    font-family: Almendra, serif;
+}
+
+button{
+    font-family: Almendra, serif;
+    border: none;
+    background-color: #E2DCDB;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input{
+    font-family: Almendra, serif;
+}

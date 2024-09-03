@@ -6,17 +6,17 @@ import { deleteReview } from "../../store/review";
 const DeleteReview = ({id, spotId}) => {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
-    console.log(id, spotId);
+    
     const handleDelete = () => {
         dispatch(deleteReview(id, spotId))
         closeModal()
     }
     return (
-        <div>
-            <h2>Confirm Delete</h2>
-            <p>Are you sure you want to delete this review?</p>
-            <button onClick={() => handleDelete()}>Yes (Delete Review)</button>
-            <button onClick={() => closeModal()}>No (Keep Review)</button>
+        <div id="delete-page">
+            <h2 className="delete-text">Confirm Delete</h2>
+            <p className="delete-text">Are you sure you want to delete this review?</p>
+            <button className="buttonText" id="delete" onClick={() => handleDelete()}>Yes (Delete Review)</button>
+            <button className="buttonText" id="keep" onClick={() => closeModal()}>No (Keep Review)</button>
         </div>
 
     )

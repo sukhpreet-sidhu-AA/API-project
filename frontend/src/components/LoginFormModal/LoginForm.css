@@ -1,12 +1,12 @@
 form{
     display: flex;
-    justify-content: center
+    justify-content: center;
 }
 
 
 label{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     padding: 1rem 0rem;
     margin: 0px 5px;
 
@@ -25,4 +25,9 @@ button{
 .error{
     color: red;
     margin: 0px 5px 16px 5px
+}
+
+#h1{
+    display: flex;
+    justify-content: center;
 }

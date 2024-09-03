@@ -25,11 +25,11 @@ function Navigation({ isLoaded }) {
     return (
         <ul className='navList'>
             <li>
-                <NavLink to="/"><FaFortAwesome /> CastleBnB</NavLink>
+                <NavLink to="/"><FaFortAwesome color='#7c142c' size='50px' /> <span id='home'>CastleBnB</span></NavLink>
             </li>
             <div id='nav-list-right'>
             {isLoaded && sessionUser && (
-                <li>
+                <li id='create-spot'>
                     <NavLink to='/spots/new'>Create a New Spot</NavLink>
                 </li>
             )}

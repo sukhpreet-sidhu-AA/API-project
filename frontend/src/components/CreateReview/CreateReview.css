@@ -28,3 +28,12 @@ input[type='radio'] {
 .errors{
     color: red;
 }
+
+#review-title{
+    display: flex;
+    justify-content: center;
+}
+
+#review-text{
+    height: 100px;
+}
